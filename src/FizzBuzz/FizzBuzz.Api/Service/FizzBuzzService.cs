@@ -25,40 +25,43 @@ namespace FizzBuzz.Api.Service
                 if (!int.TryParse(value, out var number))
                 {
                     response.Results[value] = new List<string>
-                   {
-                      "Invalid Item"
-                   };
+                    {
+                        "Invalid Item"
+                    };
 
                     continue;
                 }
-                if (number % 3 == 0 && number % 5 == 0)
+
+                if (fizzBuzz.Multiple_of(number))
                 {
                     response.Results[value] = new List<string>
-                   {
-                      "FizzBuzz"
-                   };
+                    {
+                        fizzBuzz.GetResult(number)
+                    };
                 }
-                else if (number % 3 == 0)
+
+                else if (fizz.Multiple_of(number))
                 {
                     response.Results[value] = new List<string>
-                   {
-                      "Fizz"
-                   };
+                    {
+                        fizz.GetResult(number)
+                    };
                 }
-                else if (number % 5 == 0)
+
+                else if (buzz.Multiple_of(number))
                 {
                     response.Results[value] = new List<string>
-                   {
-                      "Buzz"
-                   };
+                    {
+                        buzz.GetResult(number)
+                    };
                 }
                 else
                 {
                     response.Results[value] = new List<string>
-                   {
-                       $"Divided {number} by 3",
-                       $"Divided {number} by 5"
-                   };
+                    {
+                        $"Divided {number} by 3",
+                        $"Divided {number} by 5"
+                    };
                 }
             }
 

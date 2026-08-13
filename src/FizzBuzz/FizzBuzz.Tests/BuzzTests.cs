@@ -37,12 +37,11 @@ namespace FizzBuzz.Tests
             Assert.False(result);
         }
 
-        [Theory]
-        [InlineData(5)]
-        public void GetResult_ShouldReturnBuzz(int number)
+        [Fact]
+        public void GetResult_ShouldReturnBuzz()
         {
             // Act
-            var result = _buzz.GetResult(number);
+            var result = _buzz.GetResult(5);
 
             // Assert
             Assert.Equal("Buzz", result);

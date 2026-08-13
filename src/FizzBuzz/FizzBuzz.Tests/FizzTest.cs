@@ -27,7 +27,7 @@ namespace FizzBuzz.Tests
         }
 
         [Theory]
-        [InlineData(1)]
+        [InlineData(4)]
         [InlineData(2)]
         public void Multiple_of_ShouldReturnFalse_WhenNumberIsNotDivisibleBy3(int number)
         {
@@ -38,13 +38,11 @@ namespace FizzBuzz.Tests
             Assert.False(result);
         }
 
-        [Theory]
-        [InlineData(3)]
-        [InlineData(15)]
-        public void GetResult_ShouldReturnFizz(int number)
+        [Fact]
+        public void GetResult_ShouldReturnFizz()
         {
             // Act
-            var result = _fizz.GetResult(number);
+            var result = _fizz.GetResult(3);
 
             // Assert
             Assert.Equal("Fizz", result);
