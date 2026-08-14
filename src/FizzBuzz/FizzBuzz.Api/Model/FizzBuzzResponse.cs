@@ -2,6 +2,6 @@
 {
     public class FizzBuzzResponse
     {
-        public Dictionary<string, List<string>> Results { get; set; } = new();
+        public List<FizzBuzzResult> Results { get; set; } = new();
     }
 }

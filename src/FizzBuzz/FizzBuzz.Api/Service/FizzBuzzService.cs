@@ -19,52 +19,67 @@ namespace FizzBuzz.Api.Service
             var fizz = _Factory.CreateFizz();
             var buzz = _Factory.CreateBuzz();
             var fizzBuzz = _Factory.CreateFizzBuzz();
-
+            
             foreach (var value in request.Values)
             {
                 if (!int.TryParse(value, out var number))
                 {
-                    response.Results[value] = new List<string>
+                    response.Results.Add(new FizzBuzzResult
                     {
-                        "Invalid Item"
-                    };
-
+                        Value = value,
+                        Result = new List<string>
+                        {
+                            "Invalid Item"
+                        }
+                    });
                     continue;
                 }
-
                 if (fizzBuzz.Multiple_of(number))
                 {
-                    response.Results[value] = new List<string>
+                    response.Results.Add(new FizzBuzzResult
                     {
-                        fizzBuzz.GetResult(number)
-                    };
+                        Value = value,
+                        Result = new List<string>
+                        {
+                            fizzBuzz.GetResult(number)
+                        }
+                    });
                 }
-
                 else if (fizz.Multiple_of(number))
                 {
-                    response.Results[value] = new List<string>
+                    response.Results.Add(new FizzBuzzResult
                     {
-                        fizz.GetResult(number)
-                    };
+                        Value = value,
+                        Result = new List<string>
+                        {
+                            fizz.GetResult(number)
+                        }
+                    });
                 }
-
                 else if (buzz.Multiple_of(number))
                 {
-                    response.Results[value] = new List<string>
+                    response.Results.Add(new FizzBuzzResult
                     {
-                        buzz.GetResult(number)
-                    };
+                        Value = value,
+                        Result = new List<string>
+                        {
+                            buzz.GetResult(number)
+                        }
+                    });
                 }
                 else
                 {
-                    response.Results[value] = new List<string>
+                    response.Results.Add(new FizzBuzzResult
                     {
-                        $"Divided {number} by 3",
-                        $"Divided {number} by 5"
-                    };
+                        Value = value,
+                        Result = new List<string>
+                        {
+                            $"Divided {number} by 3",
+                            $"Divided {number} by 5"
+                        }
+                    });
                 }
             }
-
             return response;
         }
     }

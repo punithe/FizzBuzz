@@ -9,8 +9,6 @@ namespace FizzBuzz.Tests;
 public class FizzBuzzServiceTests
 {
     private readonly FizzBuzzService _service;
-
-    // Test class constructor
     public FizzBuzzServiceTests()
     {
         var factory = new FizzBuzzFactory();
@@ -29,11 +27,12 @@ public class FizzBuzzServiceTests
 
         // Act
         var response = _service.CheckFizzBuzz(request);
+        var result = response.Results.First(r => r.Value == "3");
 
         // Assert
         Assert.Equal(
             new List<string> { "Fizz" },
-            response.Results["3"]);
+            result.Result);
     }
 
     [Fact]
@@ -47,11 +46,12 @@ public class FizzBuzzServiceTests
 
         // Act
         var response = _service.CheckFizzBuzz(request);
+        var result = response.Results.First(r => r.Value == "5");
 
         // Assert
         Assert.Equal(
             new List<string> { "Buzz" },
-            response.Results["5"]);
+            result.Result);
     }
 
     [Fact]
@@ -65,11 +65,12 @@ public class FizzBuzzServiceTests
 
         // Act
         var response = _service.CheckFizzBuzz(request);
+        var result = response.Results.First(r => r.Value == "15");
 
         // Assert
         Assert.Equal(
             new List<string> { "FizzBuzz" },
-            response.Results["15"]);
+            result.Result);
     }
 
     [Fact]
@@ -85,15 +86,16 @@ public class FizzBuzzServiceTests
 
         // Act
         var response = _service.CheckFizzBuzz(request);
+        var result = response.Results.First(r => r.Value == "7");
 
         // Assert
         Assert.Equal(
             new List<string>
             {
-               $"Divided {number} by 3",
-               $"Divided {number} by 5"
+                $"Divided {number} by 3",
+                $"Divided {number} by 5"
             },
-            response.Results["7"]);
+            result.Result);
     }
 
     [Fact]
@@ -107,10 +109,30 @@ public class FizzBuzzServiceTests
 
         // Act
         var response = _service.CheckFizzBuzz(request);
+        var result = response.Results.First(r => r.Value == "abc");
 
         // Assert
         Assert.Equal(
             new List<string> { "Invalid Item" },
-            response.Results["abc"]);
+            result.Result);
+    }
+
+    [Fact]
+    public void CheckFizzBuzz_WhenValueIsNull_ReturnsInvalidItem()
+    {
+        // Arrange
+        var request = new FizzBuzzRequest
+        {
+            Values = new List<string?> { null }
+        };
+
+        // Act
+        var response = _service.CheckFizzBuzz(request);
+        var result = response.Results.First(r => r.Value == null);
+
+        // Assert
+        Assert.Equal(
+            new List<string> { "Invalid Item" },
+            result.Result);
     }
 }
